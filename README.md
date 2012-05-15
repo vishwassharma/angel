@@ -6,6 +6,9 @@ a application to connect the startup guys.
 #### supervisor
 Watch over these files
         
-        supervisor -w views,models,public,templates,app.coffee app.coffee
+        supervisor -w models,routes,app.coffee app.coffee
 
 
+### What have been done
+1. Developed a restful API for startups options
+2. Developed models
