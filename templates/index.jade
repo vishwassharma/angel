@@ -2,6 +2,13 @@ extends base
 
 block content
 
+  - if (everyauth.loggedIn)
+      span Hi, #{everyauth.twitter.user.name}
+      br
+      a(href="/logout") Logout
+  - else
+      a(href= "/auth/twitter") Login with twitter
+
   form(action='/api/startups', method='post')
     p Title :  
     input(type="text",name="title")

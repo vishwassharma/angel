@@ -1,4 +1,4 @@
-startups = require('./startups')
+startups = require "./startups"
 
 # Get home page
 index = (req, res) ->
@@ -12,6 +12,7 @@ api = (req, res) ->
 
 # Handle index page
 exports.index = index
+
 # Handle api call
 exports.api = api
 

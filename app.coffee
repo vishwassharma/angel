@@ -1,21 +1,35 @@
 express = require "express"
-router = require "./routes"
+everyauth = require "everyauth"
 path = require "path"
+router = require "./routes"
 
 app = module.exports = express.createServer()
 
 port = 9000
 app_root = __dirname
 
+# Add the tuts
+everyauth.twitter
+    .consumerKey('')
+    .consumerSecret('')
+    .findOrCreateUser((session, token, secret, user) ->
+        #console.log user
+        return user
+        #promise = @.Promise().fulfill user
+    ).redirectPath '/'
+
 # Set up some basic configuration
 app.configure ()->
+    app.use express.bodyParser()
+    app.use express.methodOverride()
+    app.use express.cookieParser()
+    app.use express.session secret : 'saldkfjl04933j34oj0943kljsd'
+    app.use everyauth.middleware()
+    app.use app.router
     app.set 'views', path.join(app_root,'templates')
     app.set 'view engine', 'jade'
     app.set 'view options',
         layout : false
-    app.use express.methodOverride()
-    app.use express.bodyParser()
-    app.use app.router
     #return
 
 # Can also configure for development and production
@@ -35,13 +49,15 @@ app.configure 'production', () ->
 app.get '/', router.index
 app.get '/api', router.api
 
+# Startup related links
 app.get '/api/startups', router.startups.get
 app.get '/api/startups/:id', router.startups.get
-
 app.post '/api/startups', router.startups.post
 app.put '/api/startups/:id', router.startups.put
-
 app.delete '/api/startups/:id', router.startups.del
+
+
+everyauth.helpExpress app
 
 app.listen port, (event) ->
     console.log "[*] Server listening on #{port}"
