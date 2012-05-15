@@ -6,7 +6,7 @@ a application to connect the startup guys.
 #### supervisor
 Watch over these files
         
-        supervisor -w models,routes,app.coffee app.coffee
+        supervisor -w models,libs,routes,app.coffee app.coffee
 
 
 ### What have been done

@@ -1,4 +1,4 @@
-models = require("../../models/startups")
+models = require("../../models/")
 
 
 # ===================================

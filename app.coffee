@@ -2,23 +2,22 @@ express = require "express"
 everyauth = require "everyauth"
 path = require "path"
 router = require "./routes"
-utils = require "./libs/utils"
-config = require "./conf"
+utils = require "./libs"
+conf = require "./conf"
+
+# -----------------------------------
+# DB stuff
+# -----------------------------------
+Promise = everyauth.Promise
+mongooseAuth = utils.mongooseAuth
+# -----------------------------------
+
 
 app = module.exports = express.createServer()
 
 port = 9000
 app_root = __dirname
 
-# Add the tuts
-everyauth.twitter
-    .consumerKey conf.twitter.key
-    .consumerSecret conf.twitter.secret
-    .findOrCreateUser((session, token, secret, user) ->
-        console.log user
-        return user
-        #promise = @.Promise().fulfill user
-    ).redirectPath '/'
 
 # Set up some basic configuration
 app.configure ()->
@@ -26,8 +25,9 @@ app.configure ()->
     app.use express.methodOverride()
     app.use express.cookieParser()
     app.use express.session secret : 'saldkfjl04933j34oj0943kljsd'
-    app.use everyauth.middleware()
-    app.use app.router
+    #app.use everyauth.middleware()
+    #app.use app.router
+    app.use mongooseAuth.middleware()
     app.set 'views', path.join(app_root,'templates')
     app.set 'view engine', 'jade'
     app.set 'view options',
@@ -49,6 +49,7 @@ app.configure 'production', () ->
     app.use express.errorHandler()
 
 app.get '/', router.index
+app.get '/users', router.users
 app.get '/api', router.api
 
 # Startup related links
@@ -59,7 +60,7 @@ app.put '/api/startups/:id', router.startups.put
 app.delete '/api/startups/:id', router.startups.del
 
 
-everyauth.helpExpress app
+mongooseAuth.helpExpress app
 
 app.listen port, (event) ->
     console.log "[*] Server listening on #{port}"
