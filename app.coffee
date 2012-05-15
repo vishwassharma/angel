@@ -5,6 +5,7 @@ router = require "./routes"
 utils = require "./libs"
 conf = require "./conf"
 
+csrf = require 'express-csrf'
 # -----------------------------------
 # DB stuff
 # -----------------------------------
@@ -18,6 +19,9 @@ app = module.exports = express.createServer()
 port = 9000
 app_root = __dirname
 
+app.dynamicHelpers
+    csrf: csrf.token
+
 
 # Set up some basic configuration
 app.configure ()->
@@ -25,6 +29,7 @@ app.configure ()->
     app.use express.methodOverride()
     app.use express.cookieParser()
     app.use express.session secret : 'saldkfjl04933j34oj0943kljsd'
+    app.use csrf.check()
     #app.use everyauth.middleware()
     #app.use app.router
     app.use mongooseAuth.middleware()
