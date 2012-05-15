@@ -22,13 +22,19 @@ app_root = __dirname
 app.dynamicHelpers
     csrf: csrf.token
 
+MemStore = require  'express/node_modules/connect/lib/middleware/session/memory'
 
 # Set up some basic configuration
 app.configure ()->
     app.use express.bodyParser()
     app.use express.methodOverride()
     app.use express.cookieParser()
-    app.use express.session secret : 'saldkfjl04933j34oj0943kljsd'
+
+    app.use express.session
+        secret : 'saldkfjl04933j34oj0943kljsd'
+        store : new MemStore
+            reapInterval : 50000 * 10
+
     app.use csrf.check()
     #app.use everyauth.middleware()
     #app.use app.router
