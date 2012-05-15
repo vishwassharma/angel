@@ -2,6 +2,8 @@ express = require "express"
 everyauth = require "everyauth"
 path = require "path"
 router = require "./routes"
+utils = require "./libs/utils"
+config = require "./conf"
 
 app = module.exports = express.createServer()
 
@@ -10,10 +12,10 @@ app_root = __dirname
 
 # Add the tuts
 everyauth.twitter
-    .consumerKey('')
-    .consumerSecret('')
+    .consumerKey conf.twitter.key
+    .consumerSecret conf.twitter.secret
     .findOrCreateUser((session, token, secret, user) ->
-        #console.log user
+        console.log user
         return user
         #promise = @.Promise().fulfill user
     ).redirectPath '/'
