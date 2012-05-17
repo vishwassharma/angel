@@ -5,7 +5,7 @@ router = require "./routes"
 utils = require "./libs"
 conf = require "./conf"
 
-csrf = require 'express-csrf'
+#csrf = require 'express-csrf'
 # -----------------------------------
 # DB stuff
 # -----------------------------------
@@ -20,7 +20,9 @@ port = 9000
 app_root = __dirname
 
 app.dynamicHelpers
-    csrf: csrf.token
+    token : (req, res) ->
+        req.session._csrf
+
 
 #MemStore = require  'express/node_modules/connect/lib/middleware/session/memory'
 MemStore = express.session.MemoryStore
@@ -35,11 +37,10 @@ app.configure ()->
         secret : 'saldkfjl04933j34oj0943kljsd'
         store : new MemStore
             reapInterval : 50000 * 10
-
-    app.use csrf.check()
     #app.use everyauth.middleware()
     #app.use app.router
     app.use mongooseAuth.middleware()
+    app.use express.csrf()
     app.set 'views', path.join(app_root,'templates')
     app.set 'view engine', 'jade'
     app.set 'view options',
