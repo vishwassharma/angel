@@ -21,12 +21,37 @@ users.UserSchema.plugin mongooseAuth,
             User: () ->
                 return User
 
+    password :
+        loginWith : 'email'
+
+        extraParams :
+            phone: String
+            name :
+                first : String
+                last: String
+
+        everyauth :
+            getLoginPath: '/login'
+            postLoginPath: '/login'
+            loginView: 'login.jade'
+            getRegisterPath: '/register'
+            postRegisterPath: '/register'
+            registerView: 'register.jade'
+            loginSuccessRedirect: '/'
+            registerSuccessRedirect: '/'
+
     twitter:
         everyauth:
             myHostname: 'http://dev.logicstick.com:9000'
             consumerKey: conf.twitter.key
             consumerSecret: conf.twitter.secret
             redirectPath: '/'
+
+    handleLogout : (req, res) ->
+        req.logout()
+        res.writeHead 303,
+            'Location': @logoutRedirectPath()
+        res.end()
 
 mongoose.model 'User', users.UserSchema
 User = mongoose.model 'User'

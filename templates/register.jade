@@ -1,0 +1,25 @@
+extends base
+
+block content
+  h2 Register to site
+  form(method='post')
+    input(type="hidden", name="csrf", value="#{csrf}")
+    p
+      | email
+      input(type='text', name="email")
+    p
+      | password
+      input(type='password', name="password")
+    p
+      | phone
+      input(type='text',name="phone")
+    p
+      | firstname
+      input(type='text',name="first")
+    p
+      | lastname
+      input(type='text',name="last")
+    p
+      | submit
+      input(type='submit')
+

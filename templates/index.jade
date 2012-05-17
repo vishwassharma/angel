@@ -3,9 +3,15 @@ extends base
 block content
 
   - if (everyauth.loggedIn)
-      span Hi, #{everyauth.twitter.user.name}
-      br
-      a(href="/logout") Logout
+    #user-id Logged in with `user.id` #{user.id} #{user.email} - aka `everyauth.user.id` #{everyauth.user.id}
+    - if (everyauth.twitter)
+      h3 Twitter User Data
+      p= JSON.stringify(everyauth.twitter.user)
+    - else
+      p= JSON.stringify(everyauth.user)
+      //-span Hi, #{everyauth.twitter.user.name}
+    br
+    a(href="/logout") Logout
   - else
       a(href= "/auth/twitter") Login with twitter
 
