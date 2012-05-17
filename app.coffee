@@ -22,7 +22,8 @@ app_root = __dirname
 app.dynamicHelpers
     csrf: csrf.token
 
-MemStore = require  'express/node_modules/connect/lib/middleware/session/memory'
+#MemStore = require  'express/node_modules/connect/lib/middleware/session/memory'
+MemStore = express.session.MemoryStore
 
 # Set up some basic configuration
 app.configure ()->
@@ -62,6 +63,9 @@ app.configure 'production', () ->
 app.get '/', router.index
 app.get '/users', router.users
 app.get '/api', router.api
+app.get '/startups', router.startups.main
+app.get '/talent', router.talents.main
+app.get '/investors', router.investors.main
 
 # Startup related links
 app.get '/api/startups', router.startups.get

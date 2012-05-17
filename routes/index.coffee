@@ -1,4 +1,7 @@
 startups = require "./startups"
+investors = require "./investors"
+talents = require "./talents"
+
 models = require "../models"
 
 # Get home page
@@ -25,3 +28,5 @@ exports.api = api
 # Handle handle startup related links
 exports.startups = startups
 exports.users = users
+exports.investors = investors
+exports.talents = talents

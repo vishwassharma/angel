@@ -1,6 +1,10 @@
 models = require("../../models/")
 
-
+# ===================================
+# Get the startup object
+# ===================================
+main = (req,res) ->
+    res.render 'investors'
 # ===================================
 # Get the startup object
 # ===================================
