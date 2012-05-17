@@ -26,7 +26,13 @@ exports.index = index
 # Handle api call
 exports.api = api
 # Handle handle startup related links
-exports.startups = startups
+
+# /users
 exports.users = users
+# /investors
 exports.investors = investors
+# /talents
 exports.talents = talents
+# /startups
+exports.startups = startups
+

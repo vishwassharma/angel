@@ -4,7 +4,7 @@ models = require("../../models/")
 # Get the startup object
 # ===================================
 main = (req,res) ->
-    res.render 'investors'
+    res.render 'startups'
 # ===================================
 # Get the startup object
 # ===================================
@@ -89,3 +89,4 @@ exports.get = get
 exports.post = post
 exports.put = put
 exports.del = del
+exports.main = main

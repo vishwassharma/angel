@@ -1,31 +1,31 @@
-class BasicView extends Backbone.View
-
-    el : '#container'
-
-    template : "<span>Template</span>"
-
-    initialize: ->
-        # code ....
-        _.bindAll @ , 'render'
-
-    render: ->
-        #.... your code here.....
-        @$el.html @template
-        @
-
-class BasicRouter extends Backbone.Router
-
-    routes:
-        '/': 'home'
-        '/startups' : 'startups'
+#// Filename: app.js
+define [
+    'mediator'
+    'router', #// Request router.js
+    #'controllers/session'
+], (mediator, AppRouter) ->
     
-    home: ->
-        #function stuff here...
-        console.log 'home page'
+    class Application
 
-    startup : ->
-        console.log 'startup page'
+        constructor : ->
+            #// Pass in our Router module and call it's initialize function
+            console.log "Creating new application"
+            @initRouter()
 
+        initRouter : ->
+            console.log "Defining router"
+            mediator.router = new AppRouter()
 
-application = new BasicRouter
-Backbone.history.start()
+            # make router property read only
+            Object.defineProperty? mediator, 'router', writable: false
+        ###
+            Controllers can communicate through Pub/Sub methods
+        ###
+        initControllers : ->
+            console.log "Initialize other controllers"
+            ## Session controller
+            #new SessionController()
+    
+    Object.freeze? Application
+
+    Application
