@@ -61,11 +61,11 @@ app.configure 'production', () ->
     app.use express.errorHandler()
 
 app.get '/', router.index
-app.get '/users', router.users
+#app.get '/users', router.users
 app.get '/api', router.api
-app.get '/startups', router.startups.main
-app.get '/talents', router.talents.main
-app.get '/investors', router.investors.main
+#app.get '/startups', router.startups.main
+#app.get '/talents', router.talents.main
+#app.get '/investors', router.investors.main
 
 # Startup related links
 app.get '/api/startups', router.startups.get

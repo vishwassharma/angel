@@ -7,7 +7,7 @@
 require.config
     baseUrl: '/js/'
     paths:
-      text: 'libs/text'
+      text: 'vendors/text'
 
     waitSeconds: 1
     #// For easier development, disable browser caching:

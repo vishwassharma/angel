@@ -1,13 +1,13 @@
 #// Filename: router.js
-define ['mediator'],(mediator) ->
+define ['mediator', 'startups/views'],(mediator, StartupView) ->
     
     class AppRouter extends Backbone.Router
     
         routes:
-            '': 'home'
-            'startups' : 'startups'
-            'talents' : 'talents'
-            'investors' : 'investors'
+            '!/': 'home'
+            '!/startups' : 'startups'
+            '!/talents' : 'talents'
+            '!/investors' : 'investors'
             '*actions': 'defaultAction'
         
         home : ->
@@ -18,6 +18,8 @@ define ['mediator'],(mediator) ->
 
         startups : ->
             console.log "startup page"
+            startupView = new StartupView()
+            console.log startupView.render()
             
         talents : ->
             console.log "talents"

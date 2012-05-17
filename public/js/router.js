@@ -2,7 +2,7 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  define(['mediator'], function(mediator) {
+  define(['mediator', 'startups/views'], function(mediator, StartupView) {
     var AppRouter;
     AppRouter = (function(_super) {
 
@@ -13,10 +13,10 @@
       }
 
       AppRouter.prototype.routes = {
-        '': 'home',
-        'startups': 'startups',
-        'talents': 'talents',
-        'investors': 'investors',
+        '!/': 'home',
+        '!/startups': 'startups',
+        '!/talents': 'talents',
+        '!/investors': 'investors',
         '*actions': 'defaultAction'
       };
 
@@ -25,7 +25,10 @@
       };
 
       AppRouter.prototype.startups = function() {
-        return console.log("startup page");
+        var startupView;
+        console.log("startup page");
+        startupView = new StartupView();
+        return console.log(startupView.render());
       };
 
       AppRouter.prototype.talents = function() {
