@@ -11,8 +11,4 @@ block content
     input(type="submit",value="Submit")
 
   section
-    - var startuplist = JSON.parse(startups)
-    - for startup in startuplist
-      article#startup
-        h3= startup.title
-        p= startup.description
+    - var x = JSON.parse(#{startups})

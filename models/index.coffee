@@ -15,12 +15,12 @@ exports.mongoose  = mongoose
 # Set up user authentication systems
 # ---------------------------------------------------------
 User = null
+
 users.UserSchema.plugin mongooseAuth,
     everymodule:
         everyauth:
             User: () ->
                 return User
-
     password :
         loginWith : 'email'
 
@@ -53,8 +53,7 @@ users.UserSchema.plugin mongooseAuth,
             'Location': @logoutRedirectPath()
         res.end()
 
-mongoose.model 'User', users.UserSchema
-User = mongoose.model 'User'
+User = mongoose.model 'User', users.UserSchema
 # ---------------------------------------------------------
 # Export Models
 # ---------------------------------------------------------

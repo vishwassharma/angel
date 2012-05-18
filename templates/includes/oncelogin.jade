@@ -1,0 +1,24 @@
+- if (everyauth.loggedIn)
+  #user-id 
+    Logged in with `user.id` #{user.id} #{user.email} - aka `everyauth.user.id` #{everyauth.user.id}
+  a(href="/logout") Logout
+
+  - if (everyauth.twitter)
+    h3 Twitter User Data
+    //-p= JSON.stringify(everyauth.twitter.user)
+  - if (everyauth.google)
+    h3 Google User Data
+    //-p= JSON.stringify(everyauth.google.user)
+  - if (everyauth.facebook)
+    h3 Facebook User Data
+    //-p= JSON.stringify(everyauth.google.user)
+- else
+  nav#login
+    ul
+      li
+        a(href="/auth/twitter") Login with Twitter
+      li
+        a(href="/auth/facebook") Login with facebook
+      li
+        a(href="/auth/google") Login with Google
+

@@ -32,7 +32,6 @@ app.configure ()->
     app.use express.bodyParser()
     app.use express.methodOverride()
     app.use express.cookieParser()
-
     app.use express.session
         secret : 'saldkfjl04933j34oj0943kljsd'
         store : new MemStore
@@ -62,7 +61,7 @@ app.configure 'production', () ->
     app.use express.errorHandler()
 
 app.get '/', router.index
-app.get '/users', router.users
+app.get '/users', router.users.main
 app.get '/api', router.api
 app.get '/startups', router.startups.main
 app.get '/talents', router.talents.main
@@ -71,7 +70,7 @@ app.get '/investors', router.investors.main
 # Startup related links
 app.get '/api/startups', router.startups.get
 app.get '/api/startups/:id', router.startups.get
-app.post '/api/startups', router.startups.post
+app.post '/api/startups', router.users.authenticate , router.startups.post
 app.put '/api/startups/:id', router.startups.put
 app.delete '/api/startups/:id', router.startups.del
 

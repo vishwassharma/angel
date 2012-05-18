@@ -29,6 +29,7 @@ get = (req, res) ->
 post = (req, res) ->
     # Create a instance of object using data in body
     item = new models.StartupModel
+                    author : req.session.auth.userId
                     title : req.body.title
                     description : req.body.description
     # Save the object into database
@@ -39,7 +40,7 @@ post = (req, res) ->
             return console.log 'created'
 
     # Return the saved object back on the screen
-    res.send item
+    res.redirect '/'
 
 # ======================================
 # Update only one startup object

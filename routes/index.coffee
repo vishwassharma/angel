@@ -1,6 +1,7 @@
 startups = require "./startups"
 investors = require "./investors"
 talents = require "./talents"
+users = require "./users"
 
 models = require "../models"
 
@@ -8,18 +9,25 @@ models = require "../models"
 index = (req, res) ->
     context =
         title : 'main page'
-    res.render 'index', context
+
+    models.StartupModel.find (err, items) ->
+        if (err)
+            return "Error"
+        else
+            context['startups'] = JSON.stringify(items)
+            return res.render 'index', context
+
+    #console.log startups
+
+    #context =
+        #title : 'main page'
+        #startups : startups
+
+    #res.render 'index', context
 
 # do something with api
 api = (req, res) ->
     res.send "API activated"
-
-users = (req, res) ->
-    models.UserModel.find (err, items) ->
-        if err
-            return console.log err
-        else
-            return res.send items
 
 # Handle index page
 exports.index = index
