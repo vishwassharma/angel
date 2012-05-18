@@ -1,0 +1,37 @@
+@import compass/typography
+
+$base-font-size : 16px
+$base-line-height : 24px
+$default-rhythm-border-style : solid
+$relative-font-sizing : true
+$round-to-nearest-half-line : false
+$min-line-padding : 2px
+$font-unit : if($relative-font-sizing, 1em, $base-font-size)
+
+
+$browser-default-font-size : 16px
+$base-rhythm-unit : $base-line-height / $base-font-size * $font-unit
+$base-leader : ($base-line-height - $base-font-size) * $font-unit / $base-font-size
+$base-half-leader : $base-leader / 2
+
+
++establish-baseline
+
+body
+  font-family: 'Helvetica Neue', sans-serif 
+  background: $color-cyan
+
+h1 
+  +adjust-font-size-to(48px)
+h2
+  +adjust-font-size-to(36px)
+h3
+  +adjust-font-size-to(24px)
+h4
+  +adjust-font-size-to(20px)
+h5
+  +adjust-font-size-to(18px)
+
+p
+  margin : 1.5em 0
+
