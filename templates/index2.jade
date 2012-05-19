@@ -1,0 +1,18 @@
+extends base
+
+block content
+
+  form(action='/api/startups', method='post')
+    input(type="hidden", name="_csrf", value="#{token}")
+    p Title :  
+    input(type="text",name="title")
+    p Description : 
+    input(type="text", name="description")
+    input(type="submit",value="Submit")
+
+  section
+    - var startuplist = JSON.parse(startups)
+    - for startup in startuplist
+      article#startup
+        h3= startup.title
+        p= startup.description

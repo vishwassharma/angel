@@ -2,16 +2,39 @@ extends base
 
 block content
 
-  form(action='/api/startups', method='post')
-    input(type="hidden", name="_csrf", value="#{token}")
-    p Title :  
-    input(type="text",name="title")
-    p Description : 
-    input(type="text", name="description")
-    input(type="submit",value="Submit")
+  #content
+    include topcontent
 
-  section
+    section#startups
+
+      section#col
+        article#startup
+          img.center-img(src='./img/branchout.jpg', alt='branchout')
+          div
+            h4.center-img umbrella
+            p some random information about inmobi sksf dkdf 
+      section#col
+        article#startup
+          img.center-img(src='./img/uber.gif', alt='uber')
+          div
+            p some random information about inmobi sksf dkdf 
+      section#col
+        article#startup
+          img.center-img(src='./img/duckduckgo.png', alt='duckduckgo')
+          div
+            p some random information about inmobi sksf dkdf 
+      section#col
+        article#startup
+          img.center-img(src='./img/branchout.jpg', alt='BranchOut')
+          div
+            p some random information about inmobi sksf dkd
+
+  section#startups
     - var startuplist = JSON.parse(startups)
+    - var imglist = ["./img/branchout.jpg", "./img/uber.gif","./img/duckduckgo.png","./img/branchout.jpg"]
+    - var columns = 4
+    - var index = 0
+
     - for startup in startuplist
       article#startup
         h3= startup.title

@@ -7,15 +7,23 @@ models = require "../models"
 
 # Get home page
 index = (req, res) ->
+    search = {}
+
+    if req.session?.auth?.loggedIn
+        search =
+            author : req.session.auth.userId
+    else
+        console.log "not logged in"
+
     context =
         title : 'main page'
 
-    models.StartupModel.find (err, items) ->
+    result = models.StartupModel.find search, (err, items) ->
         if (err)
             return "Error"
         else
             context['startups'] = JSON.stringify(items)
-            return res.render 'index', context
+            res.render 'index', context
 
     #console.log startups
 

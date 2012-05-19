@@ -1,0 +1,169 @@
+// background image
+$img-bg : '../img/bg.jpg'
+// logo
+$img-logo : '../img/logo.png'
+
+// Color ----------------
+$color-brown : #52432c
+$color-light-brown : #c8bdac
+
+$default-box-shadow-color : $color-light-brown
+$base-font-size : 16px
+$base-line-height: 24px
++establish-baseline
+
++font-face("Imprima", font-files("../../fonts/Imprima-Regular.ttf"))
+
+h1
+  +adjust-font-size-to(48px)
+h2
+  +adjust-font-size-to(36px)
+h3
+  +adjust-font-size-to(24px)
+h4
+  +adjust-font-size-to(20px)
+h5
+  +adjust-font-size-to(18px)
+p
+  margin: 1.5em 0
+
+
+
+body
+  background : url($img-bg) repeat
+  font-family: 'Imprima', sans-serif
+  //+debug-vertical-alignment
+
+
+#container
+  +container
+
+.last
+  margin-right: 0px
+
+header
+  +column(24,true)
+  +leader
+
+  h1
+    +column(6)
+    +replace-text($img-logo)
+
+  #main
+    +prepend(1)
+    +column(9)      
+    +append(4)
+
+  #sub
+    +column(4,true)
+
+  ul
+    +inline-block-list
+    +leader
+
+    li
+      margin-right : 10px
+
+    a
+      +unstyled-link
+      display:  block
+      padding : 5px 10px
+
+      &:hover, &.current
+        +border-radius(2px)
+        background : $color-brown
+        color : white
+
+    .button
+      +border-radius(2px)
+      background : $color-brown
+      color : white
+
+      &:hover
+        background : darken($color-brown,5)
+
+#content
+  +column(24,true)
+  +leader
+
+#top-content
+  +column(24, true)
+  +clearfix
+
+#search 
+  +border-radius(2px)
+  +box-shadow
+  //+rhythm-borders($lines: 0.5)
+  background : white
+
+  div
+    border : 1px solid $color-light-brown
+    +clearfix
+
+  span
+    +column(15)
+    margin : 8px 0px 0px 10px
+    //margin : rhythm($lines: 0.5)
+  
+  input
+    +column(8,true)
+    +border-radius(4px)
+    border : 1px solid $color-light-brown
+    padding : rhythm($lines:0.2) rhythm($lines :0.2)
+    margin : 8px 0px
+
+#helper
+  +leader
+  +clearfix
+
+  p
+    margin-top : 0px
+    margin-bottom : 0px
+
+  article
+    +column(6)
+    text-align : center
+
+    &.last
+      +column(6, true)
+
+
+#adv-search
+  +column(24,true)
+  display: none
+
+.center-img
+  display : block
+  margin-left : auto
+  margin-right : auto
+
+#startups
+  +leader
+  +column(24, true)
+  +clearfix
+
+  #col-1, #col-2, #col-3
+    +clearfix
+    +column(6)
+  #col-4
+    +clearfix
+    +column(6, true)
+
+  article
+    padding : 10px
+    background : white
+    +border-radius(2px)
+    //+rhythm-borders($lines: 0.5)
+    border : 1px solid $color-light-brown
+
+    //div
+      +padding-leader
+
+
+    &.last
+      margin-right : 0px
+
+footer
+  +column(24,true)
+  +clearfix
+  display : none
